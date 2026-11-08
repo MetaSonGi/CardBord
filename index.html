@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>CardBord VR 체험</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js" } }</script>
+</head>
+<body>
+<canvas id="c" aria-label="VR 장면"></canvas>
+
+<div id="hud" class="hud" hidden>
+  <span id="sceneTitle"></span>
+  <button id="exitBtn" class="ghost">메뉴</button>
+</div>
+
+<div id="menu" class="menu">
+  <h1>CardBord VR 체험</h1>
+  <p class="sub">스마트폰 카드보드나 PC 브라우저로 3개의 가상 공간을 둘러봅니다. 화면 가운데 점으로 빛나는 구슬을 <b>잠시 바라보면</b> 이동하거나 설명을 볼 수 있습니다.</p>
+
+  <fieldset>
+    <legend>장면</legend>
+    <div id="scenes" class="choices"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>보기 방식</legend>
+    <div class="choices">
+      <label><input type="radio" name="mode" value="view" checked> 화면으로 보기 <small>(드래그로 둘러보기)</small></label>
+      <label><input type="radio" name="mode" value="gyro"> 폰 움직여 보기 <small>(자이로)</small></label>
+      <label><input type="radio" name="mode" value="cardboard"> 카드보드 <small>(좌우 분할·가로 화면)</small></label>
+      <label id="xrOption" hidden><input type="radio" name="mode" value="xr"> VR 헤드셋 <small>(WebXR)</small></label>
+    </div>
+  </fieldset>
+
+  <details>
+    <summary>카드보드 설정</summary>
+    <label>눈 사이 거리 <output id="ipdOut"></output><input id="ipd" type="range" min="0.05" max="0.08" step="0.001"></label>
+    <label>시야각 <output id="fovOut"></output><input id="fov" type="range" min="60" max="100" step="1"></label>
+    <label>응시 선택 시간 <output id="fuseOut"></output><input id="fuse" type="range" min="0.5" max="4" step="0.1"></label>
+  </details>
+
+  <button id="startBtn" class="primary">체험 시작</button>
+  <p id="msg" class="msg" role="status"></p>
+  <p class="foot">카메라·위치 정보는 사용하지 않으며 서버로 아무것도 보내지 않습니다. 자이로는 기기 방향 센서만 사용합니다.</p>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
